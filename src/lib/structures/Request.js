@@ -20,13 +20,17 @@ module.exports = class Request {
     }
 
     async searchTrack({ query, limit }) {
-        const { data } = await this.request.get('/search/tracks', {
+        let { data } = await this.request.get('/search/tracks', {
             params: {
                 q: encodeURI(query),
                 limit: limit ? limit : 1
             }
         });
 
-        return new Collection(data);
+        if (!limit || limit <= 1) {
+            return new Track(data.collection.shift());
+        }
+
+        return new Collection(data.collection);
     }
 }
