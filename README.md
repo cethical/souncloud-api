@@ -20,7 +20,7 @@ const client = new Client({
 Name | Type | Description
 ---- | ---- | -----------
 query* | String | The search query
-limit | Number | The amount 
+limit | Number | The amount of results you want
 
 ```js
 ...
