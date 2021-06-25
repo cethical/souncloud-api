@@ -31,4 +31,5 @@ const <track> = client.request.searchTrack({
 });
 
 // NOTE: <track> returns a Promise
+// NOTE: If limit is added it will return an array of results, unless it is less than 1 or 1.
 ```
