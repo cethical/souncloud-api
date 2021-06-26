@@ -16,7 +16,7 @@ client_id* | String | The 'token' you will be needing
 ```js
 const { SoundCloud } = require('soundcloud-api-wrapper');
 
-const <soundcloudClient> = new SoundCloud({
+const soundcloudClient = new SoundCloud({
     client_id: 'CLIENT_ID'
 });
 ```
@@ -32,12 +32,12 @@ limit | Number | The amount of results you want
 ```js
 ...
 
-const <track> = <client>.request.searchTrack({
+const track> = client.request.searchTrack({
     query: 'hello world',
     limit: 3
 });
 
-// NOTE: <track> returns a Promise
+// NOTE: track> returns a Promise
 // NOTE: If limit is added it will return an array of results, unless it is less than 1 or 1.
 ```
 
@@ -46,10 +46,10 @@ const <track> = <client>.request.searchTrack({
 ...
 
 // For one track
-const <streamUrl> = <client>.request.createStream(<track>.media.stream);
+const streamUrl> = client.request.createStream(track.media.stream);
 
-// NOTE: <streamUrl> returns a Promise
-// NOTE: <track> can both return a single Object or an Array of objects.
+// NOTE: streamUrl returns a Promise
+// NOTE: track can both return a single Object or an Array of objects.
 ```
 
 ### Creating a Music bot
