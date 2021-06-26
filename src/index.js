@@ -1,3 +1,3 @@
 module.exports = {
-    Client: require('./lib/structures/Client')
+    SoundCloud: require('./lib/structures/Client')
 }

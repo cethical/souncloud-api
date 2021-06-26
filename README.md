@@ -6,21 +6,23 @@ A [SoundCloud](https://soundcloud.com/) API wrapper, easy to use all accessable 
 > Go to [SoundCloud](https://soundcloud.com) open console and look for the 'Network' tab. Once found make any request on SoundCloud or refresh the page and search for 'client_id', click one of the requests scroll down and Voilà.
 ![img](clientid.png)
 
-### Client
+### Creating a Client
+> Contents you will need
 
 Name | Type | Description
 ---- | ---- | -----------
 client_id* | String | The 'token' you will be needing
 
 ```js
-const { Client } = require('soundcloud-api-wrapper');
+const { SoundCloud } = require('soundcloud-api-wrapper');
 
-const <client> = new Client({
+const <soundcloudClient> = new SoundCloud({
     client_id: 'CLIENT_ID'
 });
 ```
 
 ### Searching for a Track
+> Contents you will need
 
 Name | Type | Description
 ---- | ---- | -----------
@@ -48,4 +50,43 @@ const <streamUrl> = <client>.request.createStream(<track>.media.stream);
 
 // NOTE: <streamUrl> returns a Promise
 // NOTE: <track> can both return a single Object or an Array of objects.
+```
+
+### Creating a Music bot
+> NOTE: You will need to install `discord.js`
+
+```js
+const { SoundCloud } = require('soundcloud-api-wrapper');
+const { Client } = require('discord.js');
+
+const <soundcloudClient> = new SoundCloud({
+    client_id: 'CLIENT_ID'
+});
+
+const <discordClient> = new Client();
+
+const prefix = '.';
+
+<discordClient>.on('message', async <message> => {
+    const args = <message>.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    
+    if (cmd == 'play') {
+        const track = await <soundcloudClient>.request.searchTrack({
+            query: args.join(' ')
+        });
+
+        const stream = await <soundcloudClient>.request.createStream(track.media.stream);
+
+        const voiceChannel = msg.member.voice.channel;
+        if (!voiceChannel) throw Error('Member was not found in a voice channel.');
+
+        const connection = await voiceChannel.join();
+        const dispatcher = await connection.play(stream);
+
+        // ...
+    }
+});
+
+<discordClient>.login(process.env.TOKEN);
 ```
