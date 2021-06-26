@@ -32,7 +32,7 @@ limit | Number | The amount of results you want
 ```js
 ...
 
-const track> = client.request.searchTrack({
+const track = client.request.searchTrack({
     query: 'hello world',
     limit: 3
 });
@@ -46,7 +46,7 @@ const track> = client.request.searchTrack({
 ...
 
 // For one track
-const streamUrl> = client.request.createStream(track.media.stream);
+const streamUrl = client.request.createStream(track.media.stream);
 
 // NOTE: streamUrl returns a Promise
 // NOTE: track can both return a single Object or an Array of objects.
