@@ -41,7 +41,7 @@ const <track> = <client>.request.searchTrack({
 // NOTE: If limit is added it will return an array of results, unless it is less than 1 or 1.
 ```
 
-### Creating a streaming url
+### Creating a Streaming url
 ```js
 ...
 
@@ -53,40 +53,18 @@ const <streamUrl> = <client>.request.createStream(<track>.media.stream);
 ```
 
 ### Creating a Music bot
-> NOTE: You will need to install `discord.js`
+> NOTE: This example is added [here](./test)
 
 ```js
-const { SoundCloud } = require('soundcloud-api-wrapper');
-const { Client } = require('discord.js');
-
-const <soundcloudClient> = new SoundCloud({
-    client_id: 'CLIENT_ID'
+const track = await soundcloud.request.searchTrack({
+    query: args.join(' ')
 });
 
-const <discordClient> = new Client();
+const stream = await soundcloud.request.createStream(track.media.stream);
 
-const prefix = '.';
+const voiceChannel = msg.member.voice.channel;
+const connection = await voiceChannel.join();
+const dispatcher = await connection.play(stream);
 
-<discordClient>.on('message', async <message> => {
-    const args = <message>.content.slice(prefix.length).trim().split(/ +/g);
-    const cmd = args.shift().toLowerCase();
-    
-    if (cmd == 'play') {
-        const track = await <soundcloudClient>.request.searchTrack({
-            query: args.join(' ')
-        });
-
-        const stream = await <soundcloudClient>.request.createStream(track.media.stream);
-
-        const voiceChannel = msg.member.voice.channel;
-        if (!voiceChannel) throw Error('Member was not found in a voice channel.');
-
-        const connection = await voiceChannel.join();
-        const dispatcher = await connection.play(stream);
-
-        // ...
-    }
-});
-
-<discordClient>.login(process.env.TOKEN);
+...
 ```
