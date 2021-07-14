@@ -1,4 +1,4 @@
-A [SoundCloud](https://soundcloud.com/) API wrapper, easy to use all accessable with just a token. You can view all examples [here](./test)
+A [SoundCloud](https://soundcloud.com/) API wrapper, easy to use, all accessable with just a token. You can view all examples [here](./test)
 
 > NOTE: `*` means it is required 
 
