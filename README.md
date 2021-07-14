@@ -14,7 +14,7 @@ Name | Type | Description
 client_id* | String | The 'token' you will be needing
 
 ```js
-const { SoundCloud } = require('soundcloud-api-wrapper');
+const { SoundCloud } = require('soundcloud-discord-api-wrapper');
 
 const soundcloudClient = new SoundCloud({
     client_id: 'CLIENT_ID'
